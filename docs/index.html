@@ -2724,13 +2724,13 @@ let _recentActivityTimer = null;
 // Re-render only the recent activity section using the global /api/recent-releases endpoint
 // Uses _origFetch to bypass the ctx= query param injected by the fetch interceptor
 async function _refreshRecentActivity() {
-  const el = document.querySelector('.sidebar-recent');
-  if (!el) return;
   let releases = [];
   try {
     const r = await _origFetch('/api/recent-releases?limit=20');
     releases = await r.json();
   } catch { return; }
+  const el = document.querySelector('.sidebar-recent');
+  if (!el) return;
   el.innerHTML = releases.length ? releases.map(b => {
     const modelName = (b.mountain_name || '') + (b.model_name ? '-' + b.model_name : '') || b.model_id || '?';
     const dotCls = b.status === '成功' ? 'nsd-success'
