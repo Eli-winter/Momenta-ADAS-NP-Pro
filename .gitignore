@@ -1,0 +1,32 @@
+# 业务数据（不上传）
+backend/data.json
+backend/data.json.tmp
+backend/data_backup/
+
+# 环境变量（含真实密钥）
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+
+# 日志
+*.log
+server.log
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# TTC 标定生成的 HTML 文件
+ttc-calib/
+
+# 备份文件
+backend/backups/
+*.backup_*
+*.tar.gz

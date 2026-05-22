@@ -1,0 +1,20 @@
+version: "3.9"
+
+services:
+  aes-manager:
+    build: .
+    ports:
+      - "${PORT:-8000}:8000"
+    env_file: .env
+    volumes:
+      # Mount host ~/.feishu so the container can read OAuth tokens
+      - "${FEISHU_TOKEN_HOST_DIR:-~/.feishu}:/root/.feishu:ro"
+      # Mount artifact-skill scripts so artifact_client can import artifact_tools
+      - "/root/.agents/skills/artifact-skill/scripts:/root/.agents/skills/artifact-skill/scripts:ro"
+      # Mount aes-min-ttc-calibration skill (rw: skill writes checker/html output)
+      - "/root/.agents/skills/aes-min-ttc-calibration:/root/.agents/skills/aes-min-ttc-calibration"
+      # Mount msim_bag_checker (needed by match_checker_rt_via_ess.py)
+      - "/mnt/data/msim_bag_checker:/mnt/data/msim_bag_checker:ro"
+      # Mount keycloak token cache for ESS authentication
+      - "/root/.keycloak:/root/.keycloak:ro"
+    restart: unless-stopped
