@@ -30,3 +30,5 @@ ttc-calib/
 backend/backups/
 *.backup_*
 *.tar.gz
+
+docs/mock_data.json
